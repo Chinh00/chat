@@ -1,13 +1,15 @@
-﻿FROM node:lts-alpine AS node-build
+﻿FROM node:lts-alpine
 
 WORKDIR /app
 
-COPY . .
+COPY package*.json ./
 
 RUN yarn install
+
+COPY . .
+
 RUN yarn run build
 
-EXPOSE 80
-EXPOSE 443
+EXPOSE 8080
 
 CMD ["yarn", "preview"]
