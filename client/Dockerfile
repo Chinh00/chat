@@ -1,12 +1,10 @@
 ﻿FROM node:lts-alpine
 
 WORKDIR /app
-
-COPY package*.json ./
+COPY . .
 
 RUN yarn install
 
-COPY . .
 
 RUN yarn run build
 
