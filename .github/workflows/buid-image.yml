@@ -1,0 +1,29 @@
+﻿#name: Build server chat
+#
+#
+#on: 
+##  workflow_dispatch:
+#  push:
+#    branches:
+#      - main
+#jobs: 
+##  build-server:
+##    name: Build server
+##    runs-on: ubuntu-latest
+##    steps:
+##      - name: Checkout repository
+##        uses: action/checkout@v2
+#  build-clent:
+#    name: Build client
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Checkout client
+#        user: action/checkout@v2
+#        with: 
+#          path: chat/Dockerfile ./Dockerfile
+#      - name: Login to docker
+#        user: docker/login
+#        with:
+#          username: ${{ secrets.DOCKERHUB_USERNAME }}
+#          password: ${{ secrets.DOCKERHUB_TOKEN }}
+#      - name:
