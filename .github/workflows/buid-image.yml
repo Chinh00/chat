@@ -19,7 +19,7 @@ jobs:
           path: chat
 
       - name: Move Dockerfile
-        run: mv client/Dockerfile ./Dockerfile
+        run: mv chat/client/Dockerfile ./Dockerfile
 
 
       - name: Login to Docker Hub
