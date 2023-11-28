@@ -25,9 +25,12 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build app Docker image
+      - name: Checkout client
+        user: actions/checkout@v3
         with:
           path: ./client
+
+      - name: Build app Docker image
         run: docker build . -t ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_IMAGE_NAME }}
         
 
