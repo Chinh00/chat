@@ -3,7 +3,7 @@
 WORKDIR /app
 
 
-COPY . .
+COPY . ./
 RUN yarn install
 RUN yarn run build
 
