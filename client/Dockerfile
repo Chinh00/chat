@@ -4,6 +4,8 @@ WORKDIR /app
 
 
 COPY . .
+
+
 RUN yarn install
 RUN yarn run build
 
@@ -11,4 +13,4 @@ RUN yarn run build
 
 EXPOSE 8080
 
-#CMD ["yarn", "preview"]
+CMD ["yarn", "preview"]
