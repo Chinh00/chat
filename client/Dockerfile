@@ -1,9 +1,9 @@
-﻿FROM node:lts-alpine as build
+﻿FROM node:lts-alpine
 
 WORKDIR /app
 
 
-COPY . ./
+COPY . .
 RUN yarn install
 RUN yarn run build
 
@@ -11,4 +11,4 @@ RUN yarn run build
 
 EXPOSE 8080
 
-CMD ["yarn", "preview"]
+#CMD ["yarn", "preview"]
