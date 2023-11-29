@@ -8,7 +8,7 @@ class SocketClient {
         this.connect()
     }
     public connect() {
-        this.socket = io("http://localhost:4000", {
+        this.socket = io("https://server-giy5.onrender.com", {
             transports: ["websocket", "polling", "flashsocket"],
             secure: false
         })
