@@ -30,9 +30,10 @@ function App() {
           setData(prevState => [...prevState, {ip: ip, mess: content}])
       })
       SocketClient.getSocket().on("sendFileServer", (ip, file) => {
+          console.log(ip, file)
           setData(prevState => [...prevState, {ip: ip, mess: <a download className={"underline"} target="_blank" href={`https://server-giy5.onrender.com/download/${file}`}>{file}</a> }])
       })
-
+    
       
       
   }, []);
@@ -78,7 +79,6 @@ function App() {
                   <Upload
                         onChange={e => {
                             SocketClient.getSocket().emit("sendFile", e.file.name, e.file)
-                            console.log(e)
                         }}
                         showUploadList={false}
                         beforeUpload={() => false}
