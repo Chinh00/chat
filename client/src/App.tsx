@@ -47,8 +47,8 @@ function App() {
         setInput("")
     }
   return (
-    <div className={"w-full h-screen flex justify-center items-center"}>
-      <div className={"shadow-2xl lg:w-4/5 mx-auto bg-slate-500 h-4/5 rounded-2xl border-white bg-opacity-40 p-8 grid grid-cols-4 overflow-hidden"}>
+    <div className={"w-full h-screen flex justify-center items-center overflow-hidden"}>
+      <div className={"shadow-2xl lg:w-4/5 mx-auto bg-slate-500 h-4/5 rounded-2xl border-white bg-opacity-40 p-8 grid md:grid-cols-4 grid-cols-1 overflow-hidden"}>
           <div className={"col-span-3 w-full h-full flex flex-col justify-between border gap-5"}>
               <div className={"w-full h-[80px] flex flex-col pl-10 py-3"}>
                   <span className={"text-[20px]"}>Phòng chat 1</span>
@@ -57,7 +57,7 @@ function App() {
                   </span>
               </div>
               <Divider className={"bg-white"} />
-              <div className={"w-full border-3  overflow-y-auto px-10 flex flex-col gap-5 h-[300px]"}>
+              <div className={"w-full border-3  overflow-y-auto px-10 flex flex-col gap-5 md:h-[300px] h-[200px]"}>
                   {!!data && data.map((value, index) => {
                       return <div key={index} className={"flex flex-row justify-start items-center gap-3"}>
                           <span className={"font-semibold border p-1 rounded-md shadow-2xl"}>{value.ip}</span>:
@@ -70,7 +70,7 @@ function App() {
               
               <div className={"w-full h-[60px] flex flex-row justify-center items-center gap-5 p-2 relative"}>
                   <Button onClick={() => setOpenEmoj(prevState => !prevState)} size={"large"} icon={<FaRegSmile size={25} color={"green"} />} />
-                  {openEmoj && <div className={'absolute z-50 -translate-y-2/3 -translate-x-full'}>
+                  {openEmoj && <div className={'absolute z-50 lg:-translate-y-2/3 lg:-translate-x-full -translate-y-0 -translate-x-0'}>
                       <EmojiPicker onEmojiClick={(emoji) => {
                           setInput(prevState => prevState + emoji.emoji)
                       }} />
@@ -86,7 +86,7 @@ function App() {
               </div>
               
           </div>
-          <div className={"border p-2 h-full overflow-hidden"}>
+          <div className={"border p-2 h-full overflow-hidden md:block hidden"}>
               <span className={"font-semibold text-blue-600 w-full"}>Đang hoạt động trong kênh</span>
               <div className={"p-5 flex flex-col overflow-y-auto h-full"}>
                   {!!listIpAddress && listIpAddress.map((value, index) => {
