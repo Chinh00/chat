@@ -25,7 +25,7 @@ socketIo.on("connection", (socket) => { ///Handle khi có connect từ client t�
     console.log("New client connected" + socket.id);
     
     
-    connectionIpAddress[socket.id] = socket.request.connection.remoteAddress
+    connectionIpAddress[socket.id] = socket.handshake.address
     console.log(socket.request.connection.remoteAddress)
     socketIo.emit("updateTotalUser", socketIo.engine.clientsCount)
     socketIo.emit("updateInfoUser", connectionIpAddress)
@@ -33,7 +33,6 @@ socketIo.on("connection", (socket) => { ///Handle khi có connect từ client t�
         await fs.writeFileSync("./public/" + name, data)
         socket.emit("sendFileServer", connectionIpAddress[socket.id], name) 
     })
-    
     
     
     
