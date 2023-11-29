@@ -1,8 +1,8 @@
 import {useEffect, useState} from "react";
 import io, {Socket} from 'socket.io-client';
-import {Button, Divider, Input, message} from "antd";
+import {Button, Divider, Input, message, Upload} from "antd";
 import {PiDotFill} from "react-icons/pi";
-import {SendOutlined} from "@ant-design/icons";
+import {SendOutlined, UploadOutlined} from "@ant-design/icons";
 import SocketClient from "./core/base/socketClient.ts";
 import EmojiPicker from "emoji-picker-react";
 import {FaRegSmile} from "react-icons/fa";
@@ -27,7 +27,9 @@ function App() {
       SocketClient.getSocket().on("sendDataServer", (ip, content) => {
           setData(prevState => [...prevState, {ip: ip, mess: content}])
       })
-      
+      SocketClient.getSocket().on("sendFileServer", args => {
+          console.log(args)
+      })
   }, []);
     const submitMess = () => {
         SocketClient.getSocket().emit("sendDataClient", input)
@@ -65,6 +67,14 @@ function App() {
                           setInput(prevState => prevState + emoji.emoji)
                       }} />
                   </div>}
+                  <Upload
+                        onChange={e => {
+                            SocketClient.getSocket().emit("sendFile", e.file.name, e.file)
+                            console.log(e)
+                        }}
+                        showUploadList={false}
+                        beforeUpload={() => false}
+                  ><Button icon={<UploadOutlined />} /></Upload>
                   <Input onPressEnter={submitMess} value={input} onChange={e => setInput(e.target.value)} suffix={(<Button onClick={submitMess} icon={<SendOutlined size={30} />} />)} size={"large"} rootClassName={""} />
               </div>
               
