@@ -12,6 +12,15 @@ const connectionIpAddress = {}
 app.use(express.static(path.join(__dirname, 'public')))
 
 app.use(cors())
+app.get('/download/:filename', (req, res) => {
+    const filename = req.params.filename;
+    const filePath = path.join(__dirname, 'public', filename);
+
+    res.setHeader('Content-disposition', 'attachment; filename=' + filename);
+    res.setHeader('Content-type', 'application/octet-stream');
+
+    res.sendFile(filePath);
+});
 socketIo.on("connection", (socket) => { ///Handle khi có connect từ client tới
     console.log("New client connected" + socket.id);
     
@@ -22,7 +31,7 @@ socketIo.on("connection", (socket) => { ///Handle khi có connect từ client t�
     socketIo.emit("updateInfoUser", connectionIpAddress)
     socket.on("sendFile", async function (name, data) {
         await fs.writeFileSync("./public/" + name, data)
-        socket.emit("sendFileServer", path.join(__dirname, 'public', name) )
+        socket.emit("sendFileServer", connectionIpAddress[socket.id], name) 
     })
     
     

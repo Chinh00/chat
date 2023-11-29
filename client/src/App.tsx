@@ -12,6 +12,7 @@ function App() {
     const [totalUser, setTotalUser] = useState(0)
     const [listIpAddress, setListIpAddress] = useState([])
     const [data, setData] = useState([])
+    
     // const [socket, setSocket] = useStat<Socket<>>(null)
     const [input, setInput] = useState("")
     const [openEmoj, setOpenEmoj] = useState(false)
@@ -27,8 +28,8 @@ function App() {
       SocketClient.getSocket().on("sendDataServer", (ip, content) => {
           setData(prevState => [...prevState, {ip: ip, mess: content}])
       })
-      SocketClient.getSocket().on("sendFileServer", args => {
-          console.log(args)
+      SocketClient.getSocket().on("sendFileServer", (ip, file) => {
+          setData(prevState => [...prevState, {ip: ip, mess: <a download target="_blank" href={`https://server-giy5.onrender.com/download/${file}`}>{file}</a> }])
       })
   }, []);
     const submitMess = () => {
