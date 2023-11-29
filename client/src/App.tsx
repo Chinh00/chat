@@ -18,15 +18,13 @@ function App() {
     const [input, setInput] = useState("")
     const [openEmoj, setOpenEmoj] = useState(false)
   useEffect(() => {
-     
+      
       
       SocketClient.getSocket().on("updateTotalUser", args => {
           setTotalUser(args)
       })
       SocketClient.getSocket().on("updateInfoUser", args => {
-          // message.success("Thành viên mới")
-          console.log(args)
-          setListIpAddress(Object.values(args))
+          setListIpAddress(Object.keys(args))
       })
       SocketClient.getSocket().on("sendDataServer", (ip, content) => {
           setData(prevState => [...prevState, {ip: ip, mess: content}])
@@ -50,11 +48,8 @@ function App() {
     }
   return (
     <div className={"w-full h-screen flex justify-center items-center"}>
-      <div className={"lg:w-4/5 mx-auto bg-slate-500 h-4/5 rounded-2xl border-white bg-opacity-40 p-8 grid grid-cols-4 shadow-2xl overflow-hidden"}>
-          <div className={"h-full w-full border rounded-tl-2xl rounded-tr-none border-r-0 rounded-bl-2xl p-2"}>
-              
-          </div>
-          <div className={"col-span-2 w-full h-full flex flex-col justify-between border gap-5"}>
+      <div className={"shadow-2xl lg:w-4/5 mx-auto bg-slate-500 h-4/5 rounded-2xl border-white bg-opacity-40 p-8 grid grid-cols-4 overflow-hidden"}>
+          <div className={"col-span-3 w-full h-full flex flex-col justify-between border gap-5"}>
               <div className={"w-full h-[80px] flex flex-col pl-10 py-3"}>
                   <span className={"text-[20px]"}>Phòng chat 1</span>
                   <span>
@@ -92,11 +87,11 @@ function App() {
               </div>
               
           </div>
-          <div className={"border p-2"}>
+          <div className={"border p-2 h-full overflow-hidden"}>
               <span className={"font-semibold text-blue-600 w-full"}>Đang hoạt động trong kênh</span>
-              <div className={"p-5 flex flex-col"}>
+              <div className={"p-5 flex flex-col overflow-y-auto h-full"}>
                   {!!listIpAddress && listIpAddress.map((value, index) => {
-                      return <span key={index} className={"flex flex-row justify-start gap-2 items-center"}><PiDotFill size={30} color={"blue"} /> {value}</span>
+                      return <span key={index} className={"flex flex-row justify-start gap-2 items-center text-sm"}><PiDotFill size={30} color={"blue"} /> {value}</span>
                   })}
               </div>
           </div>
