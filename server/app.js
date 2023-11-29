@@ -32,7 +32,7 @@ socketIo.on("connection", (socket) => { ///Handle khi có connect từ client t�
     socketIo.emit("updateInfoUser", connectionIpAddress)
     socket.on("sendFile", async function (name, data) {
         await fs.writeFileSync("./public/" + name, data)
-        socket.emit("sendFileServer", connectionIpAddress[socket.id], name) 
+        socketIo.emit("sendFileServer", connectionIpAddress[socket.id], name) 
     })
     
     
